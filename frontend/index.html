@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khách hàng và giao dịch</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#/khachhang"><span class="brand-mark">Q</span><span>QUẢN LÝ NHÀ SÁCH</span></a>
+        <nav class="main-nav" aria-label="Chức năng">
+            <button class="nav-item active" data-route="/khachhang">Khách hàng</button>
+            <button class="nav-item" data-route="/hoadon">Hóa đơn</button>
+            <button class="nav-item" data-route="/phieuthu">Phiếu thu</button>
+        </nav>
+        <span class="module-label">MODULE 03</span>
+    </header>
+    <main id="appContent" class="main-content"></main>
+    <div id="loadingOverlay" class="loading-overlay" aria-live="polite"><span class="spinner"></span></div>
+    <script src="js/api.js"></script>
+    <script src="js/pages/khachhang.js"></script>
+    <script src="js/pages/hoadon.js"></script>
+    <script src="js/pages/phieuthu.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

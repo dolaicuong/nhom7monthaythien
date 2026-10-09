@@ -1,0 +1,64 @@
+CREATE DATABASE IF NOT EXISTS QuanLyNhaSach_Nguoi3 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE QuanLyNhaSach_Nguoi3;
+
+-- SACH duoc module nguoi thu 2 quan ly; bang nay de project demo doc lap.
+CREATE TABLE IF NOT EXISTS SACH (
+    MaSach VARCHAR(50) PRIMARY KEY,
+    TenSach VARCHAR(255) NOT NULL,
+    TheLoai VARCHAR(150) DEFAULT '',
+    TacGia VARCHAR(255) DEFAULT '',
+    SoLuongTon INT NOT NULL DEFAULT 0,
+    DonGia DECIMAL(15,2) NOT NULL DEFAULT 0
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS KHACHHANG (
+    MaKhachHang VARCHAR(50) PRIMARY KEY,
+    HoTenKhachHang VARCHAR(255) NOT NULL,
+    DiaChi VARCHAR(500) DEFAULT '',
+    DienThoai VARCHAR(30) DEFAULT '',
+    Email VARCHAR(255) DEFAULT '',
+    SoTienNo DECIMAL(15,2) NOT NULL DEFAULT 0
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS THAMSO (
+    MaThamSo TINYINT PRIMARY KEY DEFAULT 1,
+    SoLuongNhapItNhat INT NOT NULL DEFAULT 10,
+    SoLuongTonToiDaTruocNhap INT NOT NULL DEFAULT 100,
+    SoTienNoToiDa DECIMAL(15,2) NOT NULL DEFAULT 2000000,
+    SoLuongTonSauToiThieu INT NOT NULL DEFAULT 20,
+    DonGiaBanYeuCau DECIMAL(6,3) NOT NULL DEFAULT 1.05,
+    QuyDinh TINYINT NOT NULL DEFAULT 1
+) ENGINE=InnoDB;
+
+INSERT INTO THAMSO (MaThamSo) VALUES (1)
+ON DUPLICATE KEY UPDATE MaThamSo = VALUES(MaThamSo);
+
+CREATE TABLE IF NOT EXISTS PHIEUHOADON (
+    MaPhieuHoaDon INT AUTO_INCREMENT PRIMARY KEY,
+    NgayLapHoaDon DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    MaKhachHang VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_hoadon_khachhang FOREIGN KEY (MaKhachHang) REFERENCES KHACHHANG(MaKhachHang)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS CHITIETPHIEUHOADON (
+    MaPhieuHoaDon INT NOT NULL,
+    MaSach VARCHAR(50) NOT NULL,
+    SoLuongBan INT NOT NULL,
+    PRIMARY KEY (MaPhieuHoaDon, MaSach),
+    CONSTRAINT fk_cthoadon_hoadon FOREIGN KEY (MaPhieuHoaDon) REFERENCES PHIEUHOADON(MaPhieuHoaDon),
+    CONSTRAINT fk_cthoadon_sach FOREIGN KEY (MaSach) REFERENCES SACH(MaSach)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS PHIEUTHUTIEN (
+    MaPhieuThu INT AUTO_INCREMENT PRIMARY KEY,
+    MaKhachHang VARCHAR(50) NOT NULL,
+    NgayThuTien DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    SoTienThu DECIMAL(15,2) NOT NULL,
+    CONSTRAINT fk_phieuthu_khachhang FOREIGN KEY (MaKhachHang) REFERENCES KHACHHANG(MaKhachHang)
+) ENGINE=InnoDB;
+
+-- Du lieu sach mau de thu lap hoa don. Co the xoa sau khi ket noi module 2.
+INSERT INTO SACH (MaSach, TenSach, TheLoai, TacGia, SoLuongTon, DonGia) VALUES
+('S001', 'Dac Nhan Tam', 'Ky nang', 'Dale Carnegie', 80, 65000),
+('S002', 'Cho Toi Xin Mot Ve Di Tuoi Tho', 'Van hoc', 'Nguyen Nhat Anh', 55, 75000)
+ON DUPLICATE KEY UPDATE MaSach = VALUES(MaSach);
