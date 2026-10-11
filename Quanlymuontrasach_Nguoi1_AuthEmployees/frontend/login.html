@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Đăng nhập hệ thống quản lý nhà sách" />
+    <title>Đăng nhập | Quản lý nhà sách</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-page">
+    <main class="login-layout">
+        <section class="login-story">
+            <a class="brand" href="login.html"><span class="brand-mark">Q</span><span>NHÀ SÁCH<br />QUẢN TRỊ NỘI BỘ</span></a>
+            <div class="story-copy">
+                <p class="eyebrow">Không gian làm việc</p>
+                <h1>Chào mừng<br />trở lại.</h1>
+                <p>Đăng nhập để tiếp tục quản lý hoạt động nhà sách.</p>
+            </div>
+            <div class="story-foot"><span>HỆ THỐNG QUẢN LÝ</span><span>AUTH / 01</span></div>
+        </section>
+        <section class="login-panel">
+            <div class="login-form-wrap">
+                <p class="eyebrow">Tài khoản nhân viên</p>
+                <h2>Đăng nhập</h2>
+                <p class="muted">Nhập thông tin tài khoản của bạn.</p>
+                <div id="loginError" class="alert error" hidden></div>
+                <form id="loginForm">
+                    <div class="form-group"><label for="username">Tên đăng nhập</label><input id="username" name="username" autocomplete="username" required autofocus placeholder="Ví dụ: admin" /></div>
+                    <div class="form-group"><label for="password">Mật khẩu</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Nhập mật khẩu" /></div>
+                    <button id="loginButton" class="btn btn-primary btn-full" type="submit">Đăng nhập <span aria-hidden="true">→</span></button>
+                </form>
+                <p class="form-caption">Phiên đăng nhập được bảo vệ bằng cookie HttpOnly.</p>
+            </div>
+        </section>
+    </main>
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
